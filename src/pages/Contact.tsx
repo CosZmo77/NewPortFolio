@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-12">
+      <div className="py-20 relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-12">
         {/* Left */}
         <div className="w-full md:w-1/2 space-y-8">
           <h1 className="text-6xl font-bold text-white">Get in Touch</h1>
@@ -105,15 +105,15 @@ const Contact: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-6 p-6 rounded-2xl bg-neutral-900/40 border border-neutral-700">
+            <div className="flex items-start gap-6 p-6 rounded-2xl bg-neutral-900/40 border border-neutral-700">
               <div className="p-4 rounded-full bg-neutral-800/50">
                 {EmailIcon}
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <h3 className="text-white font-semibold">Email</h3>
                 <a
                   href="mailto:syedsaadahmed77@gmail.com"
-                  className="text-neutral-400 hover:text-primary-400"
+                  className="text-neutral-400 hover:text-primary-400 break-words "
                 >
                   syedsaadahmed77@gmail.com
                 </a>

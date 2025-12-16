@@ -7,6 +7,44 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
+    title: "Cohorts App",
+    role: "Full Stack Developer",
+    year: "2025",
+    description:
+      "A community-driven platform where creators can run cohorts, manage members, share content, and deliver structured courses — all in one place. Designed for seamless engagement and smooth content consumption.",
+
+    challenge:
+      "Integrating a full course system inside the community while keeping the UI intuitive, the content structure scalable, and ensuring permissions worked correctly for different member roles.",
+
+    solution:
+      "Designed a modular course architecture with lessons, modules, and progress tracking. Implemented secure role-based access so only eligible members could view course material. Built a smooth content delivery flow using React, optimized Supabase queries for fast loading, and added real-time updates for completion status and new lesson releases.",
+
+    tech: ["React", "Supabase", "WebSockets", "Tailwind", "WebRTC"],
+    image: "/assets/Images/Cohorts.png",
+    link: "https://www.cohortsapp.com/",
+  },
+  {
+    id: 6,
+    title: "InkWorldWide",
+    role: "WordPress and Frontend Developer",
+    year: "2025",
+    description:
+      "Full-time intern developing WordPress and static websites, creating responsive and user-friendly designs.",
+    challenge:
+      "Ensuring seamless performance and responsive design while integrating custom WordPress functionality.",
+    solution:
+      "Built custom themes and plugins, optimized site performance, and delivered clean, modern frontend layouts.",
+    tech: ["WordPress", "PHP", "ACF", "Tailwind CSS", "JavaScript", "MySQL"],
+    image: "/assets/Images/Inkworldwide.png",
+    links: [
+      { name: "Techwise", url: "https://techwise.one/" },
+      { name: "Vhope", url: "https://vhopemedicalcenter.ae/" },
+      { name: "Vishwa", url: "https://vishwaengineering.com/" },
+    ],
+  },
+
+  {
+    id: 2,
     title: "Shifa Foundation NGO",
     role: "Lead Developer",
     year: "2024",
@@ -21,7 +59,7 @@ const projects = [
     link: "https://shifafoundation.net/",
   },
   {
-    id: 2,
+    id: 3,
     title: "Medicalshala",
     role: "Full Stack Developer",
     year: "2023",
@@ -36,7 +74,7 @@ const projects = [
     link: "https://medicalshala.com",
   },
   {
-    id: 3,
+    id: 4,
     title: "SwiftCare",
     role: "Developer",
     year: "2023",
@@ -51,7 +89,7 @@ const projects = [
     link: "https://swiftcare-frontend.onrender.com/",
   },
   {
-    id: 4,
+    id: 5,
     title: "MERN Job Portal",
     role: "Full Stack Developer",
     year: "2022",
@@ -183,13 +221,29 @@ export default function Projects() {
                   ))}
                 </div>
 
-                <div className="mt-10 flex gap-6">
-                  <a
-                    href={project.link}
-                    className="px-8 py-3 border border-neutral-700 hover:border-white text-neutral-300 hover:text-white font-bold rounded-lg transition-all hover:-translate-y-0.5"
-                  >
-                    View Project
-                  </a>
+                <div className="mt-10 flex flex-wrap gap-6">
+                  {project.links ? (
+                    project.links.map((l) => (
+                      <a
+                        key={l.url}
+                        href={l.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 py-3 border border-neutral-700 hover:border-white text-neutral-300 hover:text-white font-bold rounded-lg transition-all hover:-translate-y-0.5"
+                      >
+                        {l.name}
+                      </a>
+                    ))
+                  ) : (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-8 py-3 border border-neutral-700 hover:border-white text-neutral-300 hover:text-white font-bold rounded-lg transition-all hover:-translate-y-0.5"
+                    >
+                      View Project
+                    </a>
+                  )}
                 </div>
               </div>
             </article>

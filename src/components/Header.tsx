@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { gsap } from "gsap";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { name: "Home", to: "/" },
@@ -56,7 +57,9 @@ export default function Header() {
         opacity: 0,
         duration: 0.25,
         ease: "power2.in",
-        onComplete: () => gsap.set(drawerRef.current, { display: "none" }),
+        onComplete: () => {
+          gsap.set(drawerRef.current, { display: "none" });
+        },
       });
     }
   }, [isOpen]);
@@ -75,11 +78,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:px-8">
         {/* Logo */}
         <div className="flex items-center space-x-2">
-          <img
-            src="/assets/Images/LogoWhite.png"
-            alt="Logo"
-            className="h-20 w-40 md:h-20 md:w-35"
-          />
+          <Link to="/">
+            <img
+              src="/assets/Images/LogoWhite.png"
+              alt="Logo"
+              className="h-20 w-40 md:h-20 md:w-35"
+            />
+          </Link>
         </div>
 
         {/* ---------- Desktop Navigation ---------- */}

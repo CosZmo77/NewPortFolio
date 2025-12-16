@@ -11,22 +11,35 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // hero intro
-      const heroTl = gsap.timeline();
+      gsap.set(".hero-bg", { scale: 1.2 });
+      gsap.set(".hero-content", { y: 50, opacity: 0 });
+
+      const heroTl = gsap.timeline({
+        delay: 0.1,
+      });
+
       heroTl
-        .from(".hero-bg", { scale: 1.2, duration: 2, ease: "power2.out" }, 0)
-        .from(
+        .to(
+          ".hero-bg",
+          {
+            scale: 1,
+            duration: 1.6,
+            ease: "power2.out",
+          },
+          0
+        )
+        .to(
           ".hero-content",
           {
-            y: 50,
-            opacity: 0,
-            duration: 1.2,
+            y: 0,
+            opacity: 1,
+            duration: 1,
             ease: "power3.out",
           },
-          0.5
+          0.2
         );
 
-      // about
+      // About section animations
       gsap.from(".about-img-container", {
         scrollTrigger: {
           trigger: "#about",
@@ -52,7 +65,7 @@ export default function Home() {
         ease: "power3.out",
       });
 
-      // projects
+      // Projects
       gsap.utils.toArray<HTMLElement>(".project-card").forEach((card) => {
         gsap.from(card, {
           scrollTrigger: {
@@ -67,7 +80,7 @@ export default function Home() {
         });
       });
 
-      // skills
+      // Skills
       gsap.utils.toArray<HTMLElement>(".skill-card").forEach((card) => {
         gsap.from(card, {
           scrollTrigger: {
@@ -82,7 +95,7 @@ export default function Home() {
         });
       });
 
-      // works
+      // Works
       gsap.utils.toArray<HTMLElement>(".work-card").forEach((card) => {
         gsap.from(card, {
           scrollTrigger: {
@@ -108,18 +121,16 @@ export default function Home() {
     >
       {/* ---------------- Hero – full viewport ---------------- */}
       <section className="hero relative flex items-center justify-center h-screen overflow-hidden">
-        {/* Background image */}
+        {/* Background image - ✅ VISIBLE by default (no opacity-0) */}
         <div className="hero-bg absolute inset-0 w-full h-full">
           <img
-            // src="/assets/Images/Home.png"
             src="/assets/Images/Backgrounds/Home.png"
             alt="Hero background"
             className="w-full h-full object-cover opacity-60"
           />
-          {/* <div className="absolute inset-0 bg-linear-to-b from-black/30 via-transparent to-black"></div> */}
         </div>
 
-        {/* Hero text */}
+        {/* Hero text - ✅ GSAP handles opacity animation */}
         <div className="hero-content relative z-10 text-center px-4 max-w-5xl mx-auto">
           <h1 className="text-7xl md:text-8xl font-hk mb-6 text-white">
             Syed Saad Ahmed
@@ -131,7 +142,11 @@ export default function Home() {
               src="/assets/Images/Characters/grub.gif"
               alt="decorative"
               className="inline-block ml-2"
-              style={{ height: "2em", width: "auto", verticalAlign: "middle" }}
+              style={{
+                height: "2em",
+                width: "auto",
+                verticalAlign: "middle",
+              }}
             />
           </p>
         </div>
@@ -231,9 +246,17 @@ export default function Home() {
                 </p>
               </div>
 
+              {/* <a
+                href="/assets/Syed_Saad_Ahmed_Resume.pdf"
+                download
+                className="relative z-20 inline-block px-6 py-3 bg-primary-500 text-white font-bold rounded-lg shadow-lg hover:bg-primary-400 transition-all duration-300"
+              >
+                Download Resume
+              </a> */}
+
               <a
                 href="/about"
-                className="group inline-flex items-center gap-3 text-white font-bold tracking-wide hover:text-primary-400 transition-colors"
+                className="pl-7 group inline-flex items-center gap-3 text-white font-bold tracking-wide hover:text-primary-400 transition-colors"
               >
                 <span className="border-b-2 border-primary-500 pb-1 group-hover:border-white transition-colors">
                   Read My Full Story

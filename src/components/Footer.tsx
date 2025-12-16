@@ -1,56 +1,57 @@
 import React from "react";
 
-/* ---------- Icons ---------- */
-const TwitterIcon = (
+/* ---------- Developer Icons ---------- */
+/* ---------- Developer Icons ---------- */
+const GitHubIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     className="fill-current"
   >
-    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
+    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577v-2.234c-3.338.724-4.033-1.415-4.033-1.415-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.73.082-.73 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.334-5.467-5.932 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.403c1.02.005 2.047.138 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.873.12 3.176.77.84 1.234 1.91 1.234 3.22 0 4.61-2.807 5.625-5.479 5.921.43.37.814 1.102.814 2.222v3.293c0 .319.218.694.825.576C20.565 22.095 24 17.597 24 12.297c0-6.627-5.373-12-12-12z" />
   </svg>
 );
 
-const YoutubeIcon = (
+const LinkedInIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     className="fill-current"
   >
-    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+    <path d="M22.23 0H1.77C.79 0 0 .774 0 1.732v20.535C0 23.227.79 24 1.77 24h20.46C23.21 24 24 23.227 24 22.267V1.732C24 .774 23.21 0 22.23 0zM7.06 20.452H3.56V9h3.5v11.452zM5.31 7.63a2.02 2.02 0 110-4.04 2.02 2.02 0 010 4.04zM20.452 20.452h-3.5v-5.605c0-1.336-.025-3.06-1.865-3.06-1.868 0-2.154 1.46-2.154 2.967v5.698h-3.5V9h3.36v1.56h.048c.468-.89 1.607-1.83 3.305-1.83 3.534 0 4.185 2.324 4.185 5.345v6.377z" />
   </svg>
 );
 
-const FacebookIcon = (
+const DevIcon = (
   <svg
+    className="fill-current text-white"
+    width="24"
+    height="24"
+    viewBox="0 0 32 32"
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
-    viewBox="0 0 24 24"
-    className="fill-current"
   >
-    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+    <path d="M2 7 L2 25 L30 25 L30 7 L2 7 z M4 9 L28 9 L28 23 L4 23 L4 9 z M6 11 L6 21 L9 21 C10.654 21 12 19.654 12 18 L12 14 C12 12.346 10.654 11 9 11 L6 11 z M16 11 C14.897 11 14 11.897 14 13 L14 19 C14 20.103 14.897 21 16 21 L18 21 L18 19 L16 19 L16 17 L18 17 L18 15 L16 15 L16 13 L18 13 L18 11 L16 11 z M19.691406 11 L21.775391 20.025391 C21.907391 20.595391 22.415 21 23 21 C23.585 21 24.092609 20.595391 24.224609 20.025391 L26.308594 11 L24.255859 11 L23 16.439453 L21.744141 11 L19.691406 11 z M8 13 L9 13 C9.552 13 10 13.448 10 14 L10 18 C10 18.552 9.552 19 9 19 L8 19 L8 13 z" />
   </svg>
 );
 
-const InstagramIcon = (
+const WhatsAppIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     className="fill-current"
   >
-    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.069-4.85.069-3.204 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+    <path d="M20.52 3.48a11.94 11.94 0 00-16.97 0 11.94 11.94 0 00-3.51 8.48c0 2.1.55 4.15 1.59 5.95L2 22l4.18-1.38a11.937 11.937 0 005.95 1.59c2.88 0 5.63-1.12 7.68-3.17a11.94 11.94 0 000-16.97zm-8.52 17.02c-2.43 0-4.71-.73-6.61-2.07l-.47-.28-2.48.82.83-2.42-.31-.5a9.96 9.96 0 01-1.41-5.08c0-5.52 4.48-10 10-10 2.68 0 5.2 1.05 7.07 2.93a9.957 9.957 0 01.01 14.14 9.957 9.957 0 01-7.04 2.56zm5.02-7.16c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.28-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.15-.42-2.19-1.35-.81-.72-1.36-1.61-1.52-1.88-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.48-.84-2.03-.22-.53-.44-.46-.61-.47-.16-.01-.35-.01-.53-.01s-.48.07-.73.34c-.25.27-.96.94-.96 2.29s.98 2.65 1.12 2.83c.14.18 1.94 2.97 4.71 4.16.66.28 1.17.45 1.57.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.28.23-.63.23-1.16.16-1.28-.07-.12-.25-.18-.52-.32z" />
   </svg>
 );
 
 /* ---------- Footer component ---------- */
-export const Footer: React.FC = () => {
+export default function Footer() {
   const logoSrc = "/assets/Images/LogoWhite.png";
   const logoAlt = "Saad Portfolio Logo";
 
@@ -63,14 +64,12 @@ export const Footer: React.FC = () => {
 
   return (
     <footer className="relative w-full overflow-hidden">
-      {/* Background Image with Overlay */}
       <div
-        className="absolute inset-0 w-full h-full bg-top bg-cover  "
+        className="absolute inset-0 w-full h-full bg-top bg-cover"
         style={{
           backgroundImage: `url('/assets/Images/Backgrounds/HK -  (8).png')`,
         }}
-      >
-      </div>
+      ></div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
@@ -103,43 +102,43 @@ export const Footer: React.FC = () => {
             </ul>
           </nav>
 
-          {/* Social Icons */}
-          <div className="flex gap-6">
+          {/* Developer Social Icons */}
+          <div className="flex items-center gap-6">
             <a
-              href="https://twitter.com"
+              href="https://github.com/CosZmo77"
               target="_blank"
               rel="noreferrer"
               className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="Twitter"
+              aria-label="GitHub"
             >
-              {TwitterIcon}
+              {GitHubIcon}
             </a>
             <a
-              href="https://instagram.com"
+              href="https://www.linkedin.com/in/saad25492/"
               target="_blank"
               rel="noreferrer"
               className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="Instagram"
+              aria-label="LinkedIn"
             >
-              {InstagramIcon}
+              {LinkedInIcon}
             </a>
             <a
-              href="https://youtube.com"
+              href="https://dev.to/coszmo77"
               target="_blank"
               rel="noreferrer"
               className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="YouTube"
+              aria-label="Dev.to"
             >
-              {YoutubeIcon}
+              {DevIcon}
             </a>
             <a
-              href="https://facebook.com"
+              href="https://wa.me/918892880002?text=Hi%20Saad!%20Can%20We%20Connect?"
               target="_blank"
               rel="noreferrer"
-              className="text-neutral-400 hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="Facebook"
+              className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
+              aria-label="WhatsApp"
             >
-              {FacebookIcon}
+              {WhatsAppIcon}
             </a>
           </div>
         </div>
@@ -150,7 +149,8 @@ export const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 gap-4">
           <p>
-            &copy; {new Date().getFullYear()} Syed Saad Ahmed. All rights reserved.
+            &copy; {new Date().getFullYear()} Syed Saad Ahmed. All rights
+            reserved.
           </p>
           <p className="flex items-center gap-1">
             Made with <span className="text-red-500 animate-pulse">❤️</span> in
@@ -160,5 +160,4 @@ export const Footer: React.FC = () => {
       </div>
     </footer>
   );
-};
-
+}

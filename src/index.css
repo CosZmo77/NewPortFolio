@@ -3,26 +3,26 @@
 
 @font-face {
   font-family: HK;
-  src: url("/public/assets/fonts/TrajanPro-Regular.woff2") format("woff2");
+  src: url("/assets/fonts/TrajanPro-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: DM;
-  src: url("/public/assets/fonts/DenimMedium.woff2") format("woff2");
+  src: url("/assets/fonts/DenimMedium.woff2") format("woff2");
 }
 
 @font-face {
   font-family: DMR;
-  src: url("/public/assets/fonts/DenimRegular.woff2") format("woff2");
+  src: url("/assets/fonts/DenimRegular.woff2") format("woff2");
 }
 @font-face {
   font-family: GM;
-  src: url("/public/assets/fonts/GraebenbachMono-Bold.woff2") format("woff2");
+  src: url("/assets/fonts/GraebenbachMono-Bold.woff2") format("woff2");
 }
 body {
   @apply bg-black-bg text-white-txt;
   font-family: var(--font-hk);
-  cursor: url("/public/assets/Silksong_Cursor.cur"), auto;
+  cursor: url("/assets/Silksong_Cursor.cur"), auto;
 }
 @theme {
   --font-hk: "HK", sans-serif;
@@ -31,32 +31,8 @@ body {
   --font-gm: "GM", monospace;
 }
 
-.spirit-gif {
-  /* filter: drop-shadow(0px 0px 8px rgba(246, 242, 242, 0.4)); */
-  /* filter: drop-shadow(0 0 12px #62e0ff); */
-  filter: drop-shadow(0 0 8px #cdaaff);
-  filter: brightness(1.2) contrast(0.9);
-  filter: hue-rotate(10deg) saturate(1);
-  mix-blend-mode: screen;
-}
-
-.spirit {
-  animation: floatGlow 4s infinite ease-in-out;
-}
-
-@keyframes floatGlow {
-  0% {
-    transform: translateY(0);
-    filter: drop-shadow(0 0 2px #fff);
-  }
-  50% {
-    transform: translateY(-78px);
-    filter: drop-shadow(0 0 6px #fff);
-  }
-  100% {
-    transform: translateY(0);
-    filter: drop-shadow(0 0 2px #fff);
-  }
+.hero-bg {
+  transform: scale(1.2);
 }
 
 .hero-bg img {
@@ -88,4 +64,6 @@ body {
   position: relative;
   z-index: 10;
   pointer-events: auto;
+  opacity: 0;
+  transform: translateY(50px);
 }
