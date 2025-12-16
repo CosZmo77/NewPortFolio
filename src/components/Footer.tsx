@@ -53,8 +53,8 @@ export default function Footer() {
 
   const pages = [
     { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
     { label: "Projects", href: "/projects" },
-    { label: "Works", href: "/works" },
     { label: "Contact", href: "/contact" },
   ];
 

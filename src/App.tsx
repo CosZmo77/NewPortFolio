@@ -8,12 +8,14 @@ import About from "./pages/About";
 import Projects from "./pages/Projects";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import ScrollManager from "./components/ScrollManager";
 
 export default function App() {
   const [loading, setLoading] = useState(true);
 
   return (
     <BrowserRouter>
+      <ScrollManager />
       {/* Preloader overlays the app while assets load */}
       {loading && <Preloader onComplete={() => setLoading(false)} />}
 

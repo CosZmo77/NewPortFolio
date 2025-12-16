@@ -226,7 +226,7 @@ export default function Home() {
                   smarter than necessary.
                 </p>
                 <p>
-                  I’ve tamed React, Blender, AWS, and Docker—basically,{" "}
+                  I’ve tamed React, Blender, AWS, and Docker basically,{" "}
                   <span className="text-white">
                     anything that runs on the internet
                   </span>
@@ -255,8 +255,8 @@ export default function Home() {
                 Download Resume
               </a> */}
 
-              <a
-                href="/about"
+              <Link
+                to="/about"
                 className="pl-7 group inline-flex items-center gap-3 text-white font-bold tracking-wide hover:text-primary-400 transition-colors"
               >
                 <span className="border-b-2 border-primary-500 pb-1 group-hover:border-white transition-colors">
@@ -270,7 +270,7 @@ export default function Home() {
                   src="/assets/Images/Characters/hornet.gif"
                   className=" h-30 w-auto "
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -415,12 +415,12 @@ export default function Home() {
           </div>
 
           <div className="text-center">
-            <a
-              href="/projects"
+            <Link
+              to="/projects"
               className="inline-block px-8 py-3 rounded-full border border-neutral-700 text-neutral-300 hover:bg-white hover:text-black transition-all duration-300"
             >
               View All Projects
-            </a>
+            </Link>
           </div>
         </div>
       </section>
