@@ -1,7 +1,3 @@
-import React from "react";
-
-/* ---------- Developer Icons ---------- */
-/* ---------- Developer Icons ---------- */
 const GitHubIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
