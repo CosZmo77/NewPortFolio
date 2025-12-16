@@ -46,6 +46,16 @@ export default function Preloader({ onComplete }: PreloaderProps) {
   }, []);
 
   /* --------------------------------------------------
+   🔒 Lock Scroll while loading
+  -------------------------------------------------- */
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  /* --------------------------------------------------
    2️⃣ Logo intro animation
   -------------------------------------------------- */
   useEffect(() => {

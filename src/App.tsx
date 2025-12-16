@@ -14,23 +14,18 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {loading ? (
-        // ✅ Show ONLY preloader while loading
-        <Preloader onComplete={() => setLoading(false)} />
-      ) : (
-        // ✅ Render everything AFTER preloader completes
-        <>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-          <Footer />
-        </>
-      )}
+      {/* Preloader overlays the app while assets load */}
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
+
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

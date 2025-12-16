@@ -198,7 +198,7 @@ export default function Home() {
                   src="/assets/Images/Self.jpeg"
                   alt="Syed Saad Ahmed"
                   className="w-full h-full object-cover transform transition-all duration-700 ease-in-out
-           grayscale group-hover:grayscale-0 group-hover:scale-105"
+           md:grayscale group-hover:grayscale-0 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary-500/10 mix-blend-overlay"></div>
               </div>
@@ -211,7 +211,7 @@ export default function Home() {
 
             {/* Text Side */}
             <div className="about-content md:w-1/2 space-y-8">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h3 className="text-3xl md:text-5xl font-bold text-white mb-6">
                 Hello, I'm Saad
               </h3>
 

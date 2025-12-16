@@ -137,7 +137,7 @@ export default function About() {
                 <img
                   src="/assets/Images/Self.jpeg"
                   alt="Syed Saad Ahmed"
-                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 grayscale group-hover:grayscale-0"
+                  className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700 md:grayscale group-hover:grayscale-0"
                 />
                 <div className="absolute inset-0 bg-primary-500/10 mix-blend-overlay" />
               </div>
