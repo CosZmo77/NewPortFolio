@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CurvedLoop from "../components/CurvedLoop";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -711,12 +712,12 @@ export default function Home() {
             opportunities to be part of your visions.
           </p>
 
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="inline-block px-12 py-4 border-2 border-primary-500 text-primary-400 font-bold rounded-full hover:bg-primary-500 hover:text-white transition-all duration-300 hover:scale-105 shadow-[0_0_20px_rgba(var(--primary-500),0.3)] hover:shadow-[0_0_40px_rgba(var(--primary-500),0.6)]"
           >
             Contact Me
-          </a>
+          </Link>
         </div>
       </section>
     </div>
