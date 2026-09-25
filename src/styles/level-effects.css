@@ -1,0 +1,45 @@
+.level-backdrop.realm-amber { --realm-light: 229 190 126; }
+.realm-effects { position: absolute; inset: 0; overflow: hidden; pointer-events: none; contain: paint; }
+.weather-particle { position: absolute; display: block; left: var(--x); top: var(--y); opacity: 0; width: var(--size); height: var(--size); animation-delay: var(--delay); animation-duration: var(--duration); animation-iteration-count: infinite; }
+.weather-haze { position: absolute; inset: 10% -25% -15%; background: radial-gradient(ellipse at 40% 65%, rgb(var(--realm-light) / .09), transparent 58%); }
+/* The surface: pale soul wisps. */
+.effect-souls .weather-particle { border-radius: 50%; background: #d0e6ff; box-shadow: 0 0 9px 2px #9dccff55; animation-name: soul-wander; animation-timing-function: ease-in-out; }
+.effect-souls .particle-0 { width: 5px; height: 13px; border-radius: 80% 80% 50% 50%; background: linear-gradient(#deedffa6, transparent); box-shadow: 0 0 14px #c6e2ff4d; }
+/* About: warm green fireflies dart between slow-falling leaves. */
+.effect-fireflies .weather-particle { border-radius: 50%; background: #d6efa0; box-shadow: 0 0 8px 3px #b1e9674d, 0 0 23px #87b64230; animation-name: firefly-wander; animation-timing-function: ease-in-out; }
+.effect-fireflies .particle-0 { width: 12px; height: 6px; border-radius: 95% 0 95% 0; background: linear-gradient(25deg, #497549, #a6c77f); box-shadow: none; animation-name: leaf-descent; }
+.effect-fireflies .weather-haze { background: radial-gradient(ellipse at 25% 60%, #87b3430b, transparent 60%); }
+/* Work: thin rain and a few widening rings on the dark water. */
+.effect-rain .weather-particle { width: 1px; height: 60px; background: linear-gradient(transparent, #aac9e45c); animation-name: rain-fall; animation-timing-function: linear; }
+.effect-rain .particle-0 { height: 90px; width: 1px; background: linear-gradient(transparent, #c2dfff88); }
+.effect-rain .particle-3 { width: 30px; height: 8px; border: 1px solid #b5d5f366; background: none; border-radius: 50%; animation: rain-ripple 5s var(--delay) ease-out infinite; }
+.effect-rain .weather-haze { background: linear-gradient(100deg, transparent 20%, #8aa8d90b 50%, transparent 80%); }
+/* Inventory: floating crystal fragments. */
+.effect-crystals .weather-particle { width: 13px; height: 29px; clip-path: polygon(50% 0, 100% 27%, 85% 78%, 50% 100%, 15% 78%, 0 27%); background: linear-gradient(110deg, #e0cbffb0, #b195e520 48%, #d3b5ff80 51%, #52366f10); animation-name: crystal-float; animation-timing-function: ease-in-out; }
+.effect-crystals .particle-1 { width: 8px; height: 20px; }
+.effect-crystals .particle-3 { width: 4px; height: 4px; clip-path: none; border-radius: 50%; background: #e3d2ff; box-shadow: 0 0 9px #c5a4fa; }
+/* Services: workshop embers rise, with a little residual heat. */
+.effect-embers .weather-particle { width: 3px; height: 8px; border-radius: 50%; background: linear-gradient(#ffdeb4, #c7874200); box-shadow: 0 0 10px #f6b85c55; animation-name: ember-rise; animation-timing-function: ease-out; }
+.effect-embers .particle-2 { width: 2px; height: 16px; }
+.effect-embers .weather-haze { background: radial-gradient(ellipse at 50% 95%, #d9983015, transparent 60%); }
+/* Contact: lantern-like lights float upward through the quiet chamber. */
+.effect-lanterns .weather-particle { width: 8px; height: 12px; border-radius: 50% 50% 45% 45%; background: radial-gradient(ellipse, #fff2c5c9, #b2d6a655 40%, transparent 70%); box-shadow: 0 0 20px 5px #d9e8b515; animation-name: lantern-rise; animation-timing-function: ease-in-out; }
+.effect-lanterns .weather-particle::after { content: ""; position: absolute; width: 12px; height: 17px; border: 1px solid #e6edc325; border-radius: 50%; inset: -3px -2px; }
+.effect-lanterns .particle-1 { width: 4px; height: 6px; }
+.effect-lanterns .particle-1::after { display: none; }
+.effect-lanterns .weather-haze { background: radial-gradient(ellipse at 60% 70%, #acdbcb10, transparent 60%); }
+@keyframes soul-wander { 0% { opacity: 0; transform: translate3d(0, 90px, 0) scale(.7); } 25%, 65% { opacity: .65; } 100% { opacity: 0; transform: translate3d(var(--drift), -100px, 0) scale(1.1); } }
+@keyframes firefly-wander { 0%, 100% { opacity: 0; transform: translate3d(0, 35px, 0); } 20% { opacity: .8; } 45% { opacity: .2; transform: translate3d(var(--drift), -15px, 0); } 65% { opacity: .9; } 85% { opacity: .35; transform: translate3d(10px, -60px, 0); } }
+@keyframes leaf-descent { 0% { opacity: 0; transform: translate3d(0, -100px, 0) rotate(var(--turn)); } 20%, 70% { opacity: .55; } 100% { opacity: 0; transform: translate3d(var(--drift), 140px, 0) rotate(calc(var(--turn) + 160deg)); } }
+@keyframes rain-fall { from { transform: translate3d(25px, -260px, 0) rotate(8deg); opacity: 0; } 12% { opacity: .5; } 80% { opacity: .45; } to { transform: translate3d(-25px, 340px, 0) rotate(8deg); opacity: 0; } }
+@keyframes rain-ripple { 0% { transform: scale(.1); opacity: 0; } 15% { opacity: .5; } 65%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes crystal-float { 0%, 100% { opacity: .1; transform: translateY(20px) rotate(var(--turn)); } 50% { opacity: .7; transform: translateY(-30px) rotate(calc(var(--turn) + 20deg)); } }
+@keyframes ember-rise { 0% { opacity: 0; transform: translate3d(0, 170px, 0) rotate(-15deg) scale(.6); } 18% { opacity: .9; } 70% { opacity: .3; } 100% { opacity: 0; transform: translate3d(var(--drift), -160px, 0) rotate(25deg) scale(.2); } }
+@keyframes lantern-rise { 0% { opacity: 0; transform: translate3d(0, 110px, 0) scale(.8); } 30%, 65% { opacity: .8; } 50% { transform: translate3d(var(--drift), -20px, 0) scale(1); } 100% { opacity: 0; transform: translate3d(15px, -190px, 0) scale(.7); } }
+@media (max-width: 767px) {
+  .realm-effects .weather-particle:nth-of-type(n+7) { display: none; }
+  .effect-rain .weather-particle:nth-of-type(-n+10) { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .realm-effects { display: none; } }
+
+.realm-effects[data-active="true"] .weather-particle { will-change: transform, opacity; }

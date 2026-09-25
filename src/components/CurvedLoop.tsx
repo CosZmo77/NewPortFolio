@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useMemo, useId } from "react";
+import type { PointerEvent } from "react";
 
 interface CurvedLoopProps {
   marqueeText?: string;
@@ -17,149 +18,169 @@ const CurvedLoop = ({
   direction = "left",
   interactive = true,
 }: CurvedLoopProps) => {
-  const text = useMemo(() => {
-    const hasTrailing = /\s|\u00A0$/.test(marqueeText);
-    return (
-      (hasTrailing ? marqueeText.replace(/\s+$/, "") : marqueeText) + "\u00A0"
-    );
-  }, [marqueeText]);
-
+  const text = useMemo(() => marqueeText.replace(/\s+$/, "") + "\u00A0", [marqueeText]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
   const measureRef = useRef<SVGTextElement>(null);
   const textPathRef = useRef<SVGTextPathElement>(null);
-  const pathRef = useRef<SVGPathElement>(null);
   const [spacing, setSpacing] = useState(0);
-  const [offset, setOffset] = useState(0);
-  const uid = useId();
-  const pathId = `curve-${uid}`;
-  const BASE_Y = 60;
-  const pathD = `M-100,${BASE_Y} Q720,${BASE_Y + curveAmount} 1540,${BASE_Y}`;
+  const [dragging, setDragging] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const offsetRef = useRef(0);
   const dragRef = useRef(false);
   const lastXRef = useRef(0);
+  const dragScaleRef = useRef(1);
   const dirRef = useRef(direction);
-  const velRef = useRef(0);
-
-  const textLength = spacing;
-  const totalText = textLength
-    ? Array(Math.ceil(1800 / textLength) + 2)
-        .fill(text)
-        .join("")
-    : text;
-  const ready = spacing > 0;
+  const velocityRef = useRef(0);
+  const pathId = `curve-${useId()}`;
+  const pathD = `M-100,60 Q720,${60 + curveAmount} 1540,60`;
+  const totalText = spacing ? text.repeat(Math.ceil(1800 / spacing) + 2) : text;
 
   useEffect(() => {
-    if (measureRef.current)
-      setSpacing(measureRef.current.getComputedTextLength());
+    dirRef.current = direction;
+  }, [direction]);
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(preference.matches);
+    update();
+    preference.addEventListener("change", update);
+    return () => preference.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    const measure = () => {
+      if (active && measureRef.current) {
+        const length = measureRef.current.getComputedTextLength();
+        if (length > 0) setSpacing(length);
+      }
+    };
+    measure();
+    void document.fonts.ready.then(measure);
+    document.fonts.addEventListener("loadingdone", measure);
+    return () => {
+      active = false;
+      document.fonts.removeEventListener("loadingdone", measure);
+    };
   }, [text, className]);
 
   useEffect(() => {
-    if (!spacing) return;
-    if (textPathRef.current) {
-      const initial = -spacing;
-      textPathRef.current.setAttribute("startOffset", initial + "px");
-      setOffset(initial);
-    }
+    offsetRef.current = -spacing;
+    textPathRef.current?.setAttribute("startOffset", `${-spacing}px`);
   }, [spacing]);
 
   useEffect(() => {
-    if (!spacing || !ready) return;
+    const container = containerRef.current;
+    if (!spacing || reducedMotion || paused || !container) return;
+
     let frame = 0;
-    const step = () => {
+    let visible = false;
+    let previousTime = 0;
+    const step = (time: number) => {
+      const elapsed = previousTime ? Math.min(time - previousTime, 50) : 0;
+      previousTime = time;
       if (!dragRef.current && textPathRef.current) {
-        const delta = dirRef.current === "right" ? speed : -speed;
-        const currentOffset = parseFloat(
-          textPathRef.current.getAttribute("startOffset") || "0"
-        );
-        let newOffset = currentOffset + delta;
-        const wrapPoint = spacing;
-        if (newOffset <= -wrapPoint) newOffset += wrapPoint;
-        if (newOffset > 0) newOffset -= wrapPoint;
-        textPathRef.current.setAttribute("startOffset", newOffset + "px");
-        setOffset(newOffset);
+        const delta = (dirRef.current === "right" ? 1 : -1) * speed * elapsed / (1000 / 60);
+        // Keep the offset in a ref: no React renders or DOM reads on every frame.
+        offsetRef.current = ((offsetRef.current + delta) % spacing + spacing) % spacing - spacing;
+        textPathRef.current.setAttribute("startOffset", `${offsetRef.current}px`);
       }
       frame = requestAnimationFrame(step);
     };
-    frame = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(frame);
-  }, [spacing, speed, ready]);
+    const sync = () => {
+      cancelAnimationFrame(frame);
+      previousTime = 0;
+      if (visible && !document.hidden) frame = requestAnimationFrame(step);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(container);
+    document.addEventListener("visibilitychange", sync);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+      cancelAnimationFrame(frame);
+    };
+  }, [spacing, speed, reducedMotion, paused]);
 
-  const onPointerDown = (e: React.PointerEvent) => {
-    if (!interactive) return;
-    dragRef.current = false;
-    lastXRef.current = e.clientX;
-    velRef.current = 0;
-    (e.target as Element).setPointerCapture(e.pointerId);
-  };
-
-  const onPointerMove = (e: React.PointerEvent) => {
-    if (!interactive || !dragRef.current || !textPathRef.current) return;
-    const dx = e.clientX - lastXRef.current;
-    lastXRef.current = e.clientX;
-    velRef.current = dx;
-    const currentOffset = parseFloat(
-      textPathRef.current.getAttribute("startOffset") || "0"
-    );
-    let newOffset = currentOffset + dx;
-    const wrapPoint = spacing;
-    if (newOffset <= -wrapPoint) newOffset += wrapPoint;
-    if (newOffset > 0) newOffset -= wrapPoint;
-    textPathRef.current.setAttribute("startOffset", newOffset + "px");
-    setOffset(newOffset);
-  };
-
-  const endDrag = () => {
-    if (!interactive) return;
+  const onPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (!interactive || reducedMotion || !spacing || event.button !== 0 || (event.target as Element).closest("button")) return;
     dragRef.current = true;
-    dirRef.current = velRef.current > 0 ? "right" : "left";
+    setDragging(true);
+    lastXRef.current = event.clientX;
+    velocityRef.current = 0;
+    const width = svgRef.current?.getBoundingClientRect().width || 1440;
+    dragScaleRef.current = 1440 / width;
+    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
-  const cursorStyle = interactive
-    ? dragRef.current
-      ? "grabbing"
-      : "grab"
-    : "auto";
+  const onPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!dragRef.current || !textPathRef.current || !spacing) return;
+    const delta = (event.clientX - lastXRef.current) * dragScaleRef.current;
+    lastXRef.current = event.clientX;
+    velocityRef.current = delta;
+    offsetRef.current = ((offsetRef.current + delta) % spacing + spacing) % spacing - spacing;
+    textPathRef.current.setAttribute("startOffset", `${offsetRef.current}px`);
+  };
+
+  const endDrag = (event: PointerEvent<HTMLDivElement>) => {
+    if (!dragRef.current) return;
+    dragRef.current = false;
+    setDragging(false);
+    if (velocityRef.current) dirRef.current = velocityRef.current > 0 ? "right" : "left";
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+  };
 
   return (
     <div
+      ref={containerRef}
       className="relative w-full flex items-center justify-center overflow-visible"
-      style={{ visibility: ready ? "visible" : "hidden", cursor: cursorStyle }}
+      style={{
+        cursor: interactive && !reducedMotion ? dragging ? "grabbing" : "grab" : undefined,
+        touchAction: interactive ? "pan-y" : undefined,
+      }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={endDrag}
-      onPointerLeave={endDrag}
+      onPointerCancel={endDrag}
+      onLostPointerCapture={endDrag}
     >
+      <span className="sr-only">{marqueeText}</span>
       <svg
+        ref={svgRef}
         className="select-none w-full h-[120px] overflow-visible block text-[4rem] leading-none"
         viewBox="0 0 1440 120"
+        aria-hidden="true"
       >
-        <text
-          ref={measureRef}
-          xmlSpace="preserve"
-          style={{ visibility: "hidden", opacity: 0, pointerEvents: "none" }}
-        >
+        <text ref={measureRef} className={className} xmlSpace="preserve" style={{ visibility: "hidden", pointerEvents: "none" }}>
           {text}
         </text>
-        <defs>
-          <path
-            ref={pathRef}
-            id={pathId}
-            d={pathD}
-            fill="none"
-            stroke="transparent"
-          />
-        </defs>
-        {ready && (
+        <defs><path id={pathId} d={pathD} fill="none" /></defs>
+        {spacing > 0 && (
           <text xmlSpace="preserve" className={`fill-white ${className ?? ""}`}>
-            <textPath
-              ref={textPathRef}
-              href={`#${pathId}`}
-              startOffset={offset + "px"}
-              xmlSpace="preserve"
-            >
+            <textPath ref={textPathRef} href={`#${pathId}`} startOffset={-spacing} xmlSpace="preserve">
               {totalText}
             </textPath>
           </text>
         )}
       </svg>
+      {!reducedMotion && (
+        <button
+          type="button"
+          onClick={() => setPaused((value) => !value)}
+          aria-pressed={paused}
+          aria-label={paused ? "Resume scrolling text" : "Pause scrolling text"}
+          className="absolute right-6 bottom-0 px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-neutral-400 hover:text-white transition-colors"
+        >
+          {paused ? "Resume motion" : "Pause motion"}
+        </button>
+      )}
     </div>
   );
 };

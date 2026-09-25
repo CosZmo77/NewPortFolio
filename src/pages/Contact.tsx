@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import { useArrivalReady } from "../hooks/ArrivalContext";
+import LevelBackdrop from "../components/LevelBackdrop";
+import { useLayoutEffect, useRef } from "react";
+import ContactForm from "../components/ContactForm";
+import { gsap } from "gsap";
+import { useSearchParams } from "react-router-dom";
+import "../styles/contact.css";
 
 /* ---------- Icons ---------- */
 const EmailIcon = (
@@ -7,8 +13,8 @@ const EmailIcon = (
     width="48"
     height="48"
     viewBox="0 0 48 48"
+    aria-hidden="true"
   >
-    {/* <title>Hollow-knight SVG Icon</title> */}
     <path
       fill="none"
       stroke="currentColor"
@@ -31,11 +37,11 @@ const LocationIcon = (
     width="48"
     height="48"
     viewBox="0 0 48 48"
+    aria-hidden="true"
   >
-    {/* <title>Zood-location SVG Icon</title> */}
     <g
       fill="none"
-      stroke="#ffffff"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -48,131 +54,73 @@ const LocationIcon = (
       cy="24"
       r="21.5"
       fill="none"
-      stroke="#ffffff"
+      stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
   </svg>
 );
 
-const ACCESS_KEY = "4c607e09-8a9d-4a9f-81e5-b778734afe25";
+const Flourish = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="212" height="28" viewBox="0 0 212 28" fill="none" aria-hidden="true">
+    <path d="M1 14h65c17 0 21-9 26-9-4 9-1 14 14 20 15-6 18-11 14-20 5 0 9 9 26 9h65M106 2v15M79 14l-5 5-5-5 5-5 5 5Zm64 0-5 5-5-5 5-5 5 5Z" stroke="currentColor" strokeWidth=".8" />
+  </svg>
+);
 
-const Contact: React.FC = () => {
-  const [sent, setSent] = useState(false);
+const Contact = () => {
+  const [searchParams] = useSearchParams();
+  const requestedService = searchParams.get("service") ?? "";
+  const containerRef = useRef<HTMLDivElement>(null);
+  const arrived = useArrivalReady();
+  useLayoutEffect(() => {
+    if (!arrived) return;
+    const media = gsap.matchMedia();
+    media.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".contact-intro > *, .contact-letter", {
+        y: 28,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.12,
+        ease: "power3.out",
+      });
+    }, containerRef);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    formData.append("access_key", ACCESS_KEY);
-
-    await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
-
-    setSent(true);
-    e.currentTarget.reset();
-  };
+    return () => {
+      media.revert();
+    };
+  }, [arrived]);
 
   return (
-    <div className="relative min-h-screen w-full py-24 px-6 flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: `url('/assets/Images/Backgrounds/HK -  (17).jpg')`,
-        }}
-      />
-
-      <div className="py-20 relative z-10 w-full max-w-6xl mx-auto flex flex-col md:flex-row gap-12">
-        {/* Left */}
-        <div className="w-full md:w-1/2 space-y-8">
-          <h1 className="text-6xl font-bold text-white">Get in Touch</h1>
-          <p className="text-neutral-300 max-w-lg">
-            Have a project in mind or just want to say hi? I'm always open to
-            new ideas and collaborations.
-          </p>
-
-          <div className="space-y-6">
-            <div className="flex items-center gap-6 p-6 rounded-2xl bg-neutral-900/40 border border-neutral-700">
-              <div className="p-4 rounded-full bg-neutral-800/50">
-                {LocationIcon}
-              </div>
-              <div>
-                <h3 className="text-white font-semibold">Location</h3>
-                <p className="text-neutral-400">Mysore, Karnataka, India</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-6 p-6 rounded-2xl bg-neutral-900/40 border border-neutral-700">
-              <div className="p-4 rounded-full bg-neutral-800/50">
-                {EmailIcon}
-              </div>
-              <div className="flex-1 min-w-0">
-                <h3 className="text-white font-semibold">Email</h3>
-                <a
-                  href="mailto:syedsaadahmed77@gmail.com"
-                  className="text-neutral-400 hover:text-primary-400 break-words "
-                >
-                  syedsaadahmed77@gmail.com
-                </a>
-              </div>
+    <div ref={containerRef} className="contact-realm level-awake">
+      <LevelBackdrop scene="bg-17" tone="green" effect="lanterns" priority />
+      <div className="contact-journey-label" aria-hidden="true"><span /> THE QUIET CLEARING <span /></div>
+      <div className="contact-layout">
+        <div className="contact-intro">
+          <div className="contact-sigil" aria-hidden="true">
+            <span className="contact-sigil-orbit" />
+            <span className="contact-sigil-orbit contact-sigil-orbit-inner" />
+            {EmailIcon}
+            <i /><i /><i />
+          </div>
+          <p className="contact-eyebrow">HAVE SOMETHING IN MIND?</p>
+          <h1>Every good story<br />starts with<br /><em>a hello.</em></h1>
+          <p className="contact-opening">A rough idea, a wild ambition, or a website that needs a little more soul. Tell me what you&apos;re thinking. We&apos;ll take it from there.</p>
+          <div className="contact-details">
+            <a href="mailto:syedsaadahmed77@gmail.com" className="contact-detail contact-email">
+              <span className="contact-detail-icon">{EmailIcon}</span>
+              <span><span className="contact-detail-label">THE DIRECT ROUTE</span><span className="contact-detail-value">syedsaadahmed77@gmail.com</span></span>
+              <span className="contact-link-arrow" aria-hidden="true">↗</span>
+            </a>
+            <div className="contact-detail">
+              <span className="contact-detail-icon">{LocationIcon}</span>
+              <span><span className="contact-detail-label">CREATING FROM</span><span className="contact-detail-value">Mysore, Karnataka, India</span></span>
             </div>
           </div>
         </div>
 
-        {/* Right Form */}
-        <div className="w-full md:w-1/2">
-          <form
-            onSubmit={onSubmit}
-            className="p-10 rounded-3xl bg-neutral-900/60 border border-neutral-700 backdrop-blur-xl"
-          >
-            <h3 className="text-2xl font-bold text-white mb-8">
-              Send a Message
-            </h3>
-
-            <div className="space-y-6">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                required
-                className="w-full px-6 py-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white"
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                required
-                className="w-full px-6 py-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white"
-              />
-
-              <textarea
-                name="message"
-                rows={4}
-                placeholder="Tell me about your project..."
-                required
-                className="w-full px-6 py-4 rounded-xl bg-neutral-800 border border-neutral-700 text-white resize-none"
-              />
-
-              <button
-                type="submit"
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-primary-600 to-primary-500 text-white font-bold"
-              >
-                Send Message
-              </button>
-
-              {sent && (
-                <p className="text-green-400 text-center mt-4">
-                  Message sent successfully.
-                </p>
-              )}
-            </div>
-          </form>
-        </div>
+        <ContactForm initialService={requestedService} />
       </div>
+      <div className="contact-bottom-mark" aria-hidden="true"><Flourish /><span>THE END OF THE PATH. THE START OF SOMETHING.</span></div>
     </div>
   );
 };

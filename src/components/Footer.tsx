@@ -1,3 +1,8 @@
+import JourneyLink from "./JourneyLink";
+import SceneBackground from "./SceneBackground";
+import CharacterSprite from "./CharacterSprite";
+import LevelEffects from "./LevelEffects";
+import "../styles/footer.css";
 const GitHubIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -46,114 +51,34 @@ const WhatsAppIcon = (
   </svg>
 );
 
-/* ---------- Footer component ---------- */
+const elsewhere = [
+  { label: "GitHub", href: "https://github.com/CosZmo77", icon: GitHubIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/saad25492/", icon: LinkedInIcon },
+  { label: "Dev.to", href: "https://dev.to/coszmo77", icon: DevIcon },
+  { label: "WhatsApp", href: "https://wa.me/918892880002?text=Hi%20Saad!%20Can%20We%20Connect?", icon: WhatsAppIcon },
+];
+
+const Bench = () => <svg className="rest-bench" viewBox="0 0 300 180" fill="none" aria-hidden="true">
+  <path d="M44 97h212v17H44zM55 85V54c0-18 19-22 28-10m162 41V54c0-18-19-22-28-10M65 89V52m170 37V52M77 89V50h146v39M89 53v32m20-32v32m20-32v32m20-32v32m20-32v32m20-32v32m20-32v32M54 119l-9 39m29-39-6 30m152-30 6 30m20-30 9 39M34 158h27m178 0h27" stroke="currentColor" strokeWidth="2" />
+  <path d="M36 95c-24-3-21-35-5-33 12 2 12 16 3 17m230 16c24-3 21-35 5-33-12 2-12 16-3 17M62 119h176M94 31q56-28 112 0M100 31h100" stroke="currentColor" strokeWidth="1.3" />
+  <path d="m144 13 6-10 6 10-6 10-6-10Z" stroke="currentColor" />
+</svg>;
+
 export default function Footer() {
-  const logoSrc = "/assets/Images/LogoWhite.png";
-  const logoAlt = "Saad Portfolio Logo";
-
-  const pages = [
-    { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Projects", href: "/projects" },
-    { label: "Contact", href: "/contact" },
-  ];
-
-  return (
-    <footer className="relative w-full overflow-hidden">
-      <div
-        className="absolute inset-0 w-full h-full bg-top bg-cover"
-        style={{
-          backgroundImage: `url('/assets/Images/Backgrounds/HK -  (8).png')`,
-        }}
-      ></div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* Logo & Tagline */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <img
-              src={logoSrc}
-              alt={logoAlt}
-              className="h-12 w-auto mb-4 opacity-90 hover:opacity-100 transition-opacity duration-300"
-            />
-            <p className="text-white text-sm max-w-xs">
-              Crafting immersive digital experiences with code and creativity.
-            </p>
-          </div>
-
-          {/* Navigation */}
-          <nav>
-            <ul className="flex flex-wrap justify-center gap-8">
-              {pages.map((p) => (
-                <li key={p.href}>
-                  <a
-                    href={p.href}
-                    className="text-white hover:text-primary-400 text-sm font-medium transition-colors duration-300 relative group"
-                  >
-                    {p.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-full"></span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Developer Social Icons */}
-          <div className="flex items-center gap-6">
-            <a
-              href="https://github.com/CosZmo77"
-              target="_blank"
-              rel="noreferrer"
-              className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="GitHub"
-            >
-              {GitHubIcon}
-            </a>
-            <a
-              href="https://www.linkedin.com/in/saad25492/"
-              target="_blank"
-              rel="noreferrer"
-              className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              {LinkedInIcon}
-            </a>
-            <a
-              href="https://dev.to/coszmo77"
-              target="_blank"
-              rel="noreferrer"
-              className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="Dev.to"
-            >
-              {DevIcon}
-            </a>
-            <a
-              href="https://wa.me/918892880002?text=Hi%20Saad!%20Can%20We%20Connect?"
-              target="_blank"
-              rel="noreferrer"
-              className="text-white hover:text-primary-400 transform hover:scale-110 transition-all duration-300"
-              aria-label="WhatsApp"
-            >
-              {WhatsAppIcon}
-            </a>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="w-full h-px bg-neutral-800 my-8"></div>
-
-        {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-neutral-500 gap-4">
-          <p>
-            &copy; {new Date().getFullYear()} Syed Saad Ahmed. All rights
-            reserved.
-          </p>
-          <p className="flex items-center gap-1">
-            Made with <span className="text-red-500 animate-pulse">❤️</span> in
-            India
-          </p>
-        </div>
+  return <footer className="site-footer resting-chamber" aria-label="The last resting place">
+    <SceneBackground name="bg-08" />
+    <div className="resting-shade" aria-hidden="true" />
+    <LevelEffects effect="lanterns" />
+    <div className="resting-content">
+      <div className="resting-heading"><p className="resting-label">YOU FOUND A QUIET CORNER</p><h2>Rest here a while.</h2><p>Every good adventure leaves room for another.</p></div>
+      <div className="resting-world">
+        <JourneyLink to="about" className="rest-door rest-door-left" aria-label="Meet the maker — About"><span className="rest-door-arch" aria-hidden="true"><span className="rest-door-light" /><CharacterSprite name="grub" width="70" height="70" loading="lazy" decoding="async" alt="" /></span><span className="resting-label">THE MAKER</span><span className="rest-door-title">A familiar face</span></JourneyLink>
+        <div className="resting-bench-scene"><div className="resting-lamp" aria-hidden="true"><i /><span /></div><CharacterSprite className="resting-knight" name="ghost" width="100" height="100" loading="lazy" decoding="async" alt="" /><Bench /><div className="resting-ground" aria-hidden="true" /><JourneyLink className="resting-return" to="surface"><svg width="16" height="23" viewBox="0 0 16 23" fill="none" aria-hidden="true"><path d="M8 22V2M2 8l6-6 6 6M4 13l4-4 4 4" stroke="currentColor" /></svg><span>Return to the surface</span></JourneyLink></div>
+        <JourneyLink to="projects" className="rest-door rest-door-right" aria-label="Explore the work — Projects"><span className="rest-door-arch" aria-hidden="true"><span className="rest-door-light" /><CharacterSprite name="silksongflew" width="70" height="70" loading="lazy" decoding="async" alt="" /></span><span className="resting-label">THE WORK</span><span className="rest-door-title">Paths I've taken</span></JourneyLink>
       </div>
-    </footer>
-  );
+      <JourneyLink to="contact-letter" contact className="resting-quest"><span className="resting-quest-line" /><span>Begin something together</span><span className="resting-quest-line" /></JourneyLink>
+      <nav className="resting-charms" aria-label="Find me elsewhere">{elsewhere.map(item => <a key={item.label} href={item.href} target="_blank" rel="noreferrer" aria-label={`${item.label} (opens in a new tab)`}><span className="resting-charm" aria-hidden="true">{item.icon}</span><span className="resting-charm-label">{item.label}</span></a>)}</nav>
+      <div className="resting-colophon"><JourneyLink to="surface" aria-label="Saad Design home"><img src="/assets/optimized/logo-white.webp" width="106" height="60" loading="lazy" decoding="async" alt="Saad Design" /></JourneyLink><p>© {new Date().getFullYear()} Syed Saad Ahmed</p><span>Imagined & built in Mysore, India</span></div>
+    </div>
+  </footer>;
 }

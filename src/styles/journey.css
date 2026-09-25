@@ -1,0 +1,33 @@
+.world-level:focus, #surface:focus, #about-trail:focus, #contact-letter:focus { outline: none; }
+.chapter-exit { display: flex; flex-direction: column; align-items: center; gap: 11px; width: fit-content; min-height: 60px; margin: 72px auto 0; color: #bdcbd1; font: 13px/1.6 var(--font-dmr); }
+.chapter-exit small { color: #859794; font: 8px/1.5 var(--font-gm); letter-spacing: .18em; text-transform: uppercase; }
+.descent-marquee .chapter-exit { margin: 0 auto 48px; }
+.chapter-exit svg { height: 28px; width: 18px; transition: transform .6s cubic-bezier(.22,1,.36,1), color .4s; }
+.chapter-exit:hover svg { transform: translateY(5px); color: #e3f4ee; }
+.about-trail { width: 100%; scroll-margin-top: 30px; }
+.about-trail-content { max-width: 1040px; margin: 0 auto; padding: 60px 0 0; border-top: 1px solid #a0c3b02e; animation: trail-reveal 1s ease both; }
+.trail-eyebrow { color: #a7c2b4; font: 9px/1.5 var(--font-gm); letter-spacing: .14em; }
+.about-trail-content > h3 { margin: 16px 0 20px; color: #e2eee7; font: 400 clamp(28px, 3vw, 42px)/1.35 var(--font-hk); }
+.trail-intro { max-width: 540px; color: #b3c2b9; font: 17px/1.8 var(--font-dmr); }
+.trail-columns { display: grid; grid-template-columns: 1.6fr 1fr; gap: 80px; margin-top: 48px; }
+.trail-timeline { padding: 0; margin: 0; list-style: none; }
+.trail-timeline li { position: relative; display: grid; grid-template-columns: 50px 1fr; gap: 28px; padding: 0 0 35px; }
+.trail-timeline li::before { content: ""; position: absolute; left: 62px; top: 8px; bottom: -8px; width: 1px; background: #a6c5b430; }
+.trail-timeline li:last-child::before { bottom: 35px; }
+.trail-timeline li::after { content: ""; position: absolute; left: 60px; top: 8px; width: 5px; height: 5px; background: #c4dccb; transform: rotate(45deg); }
+.trail-year { color: #98b3a5; padding-top: 4px; font: 10px/1.6 var(--font-gm); }
+.trail-columns h4 { margin: 0 0 8px; font: 500 19px/1.5 var(--font-dmr); color: #dce9e0; }
+.trail-columns p:not(.trail-eyebrow) { margin: 0; font: 15px/1.8 var(--font-dmr); color: #a9bdb2; }
+.trail-education { padding-left: 32px; border-left: 1px solid #a6c5b424; }
+.trail-education > svg { color: #a6c5b480; margin: 0 0 25px; }
+.trail-education h4 { margin-top: 28px; }
+.trail-education > span { display: block; margin-top: 9px; font: 10px/1.7 var(--font-gm); color: #859f8f; }
+#contact-letter { scroll-margin-top: 30px; }
+@keyframes trail-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 700px) {
+  .trail-columns { grid-template-columns: 1fr; gap: 30px; }
+  .trail-education { border-left: 0; border-top: 1px solid #a6c5b424; padding: 30px 0 0; }
+  .trail-education > svg { display: none; }
+  .chapter-exit { margin-top: 50px; }
+}
+@media (prefers-reduced-motion: reduce) { .about-trail-content { animation: none; } .chapter-exit svg { transition: none; } }

@@ -1,0 +1,20 @@
+.current-experience { width: 100%; margin: 46px 0 55px; padding: clamp(24px, 4vw, 44px); border: 1px solid #b5d0c52e; border-left: 2px solid #bddcca88; background: linear-gradient(120deg, #0b1e19d9, #030b09b5); text-align: left; }
+.current-experience-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 25px; font: 10px/1.6 var(--font-gm); color: #b1c8bb; }
+.current-role-mark { display: inline-flex; align-items: center; gap: 12px; letter-spacing: .13em; }
+.current-role-mark::before { content: ""; width: 6px; height: 6px; background: #cce8d6; transform: rotate(45deg); box-shadow: 0 0 12px #afd5bc55; }
+.current-experience h4 { margin: 0 0 16px; color: #e3eee6; font: 400 clamp(21px, 2.6vw, 32px)/1.45 var(--font-hk); text-wrap: balance; }
+.current-experience-role { color: #ccdfd3; font: 500 18px/1.6 var(--font-dmr); margin: 0; }
+.current-experience-location { color: #92afa0; font: 12px/1.8 var(--font-dmr); margin: 5px 0 22px; }
+.current-experience-intro { max-width: 760px; color: #bbcfc2; font: 17px/1.85 var(--font-dmr); }
+.current-experience-work { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 36px; padding: 30px 0; margin: 0; list-style: none; }
+.current-experience-work li { display: flex; gap: 15px; }
+.current-experience-work li > span { padding-top: 5px; color: #84a28e; font: 9px/1.6 var(--font-gm); }
+.current-experience-work h5 { margin: 0 0 9px; color: #d3e3d9; font: 500 16px/1.6 var(--font-dmr); }
+.current-experience-work p { margin: 0; color: #abc0b3; font: 14px/1.85 var(--font-dmr); }
+.current-experience-link { display: flex; gap: 14px; justify-content: space-between; flex-wrap: wrap; align-items: center; min-height: 50px; padding-top: 20px; border-top: 1px solid #b4d0bb24; color: #98b2a1; font: 12px/1.6 var(--font-dmr); }
+.current-experience-link > span { color: #d5e7dc; }
+.current-experience-link:hover > span { text-decoration: underline; text-underline-offset: 5px; }
+@media(max-width:700px) { .current-experience-work { grid-template-columns: 1fr; gap: 25px; } .current-experience-role { font-size: 16px; } .current-experience-intro { font-size: 15px; } }
+/* A field journal etched into the scene, with no opaque dashboard shell. */
+.current-experience { padding-inline: clamp(15px, 3vw, 36px); border: 0; border-left: 1px solid #bddcca66; background: linear-gradient(90deg, #91c6aa08, transparent 65%); position: relative; }
+.current-experience::before { content: ""; position: absolute; width: 9px; height: 9px; left: -5px; top: 0; transform: rotate(45deg); background: #cce0d1; box-shadow: 0 0 20px #a7d9bf66; }

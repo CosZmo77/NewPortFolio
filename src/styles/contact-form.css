@@ -1,0 +1,19 @@
+.contact-letter-embedded {
+  --contact-ivory: #ecebe0;
+  --contact-sage: #bac9b5;
+  --contact-line: #bec9ae42;
+  width: min(100%, 690px);
+  margin: 38px auto 0;
+  color: var(--contact-ivory);
+  text-align: left;
+}
+
+.contact-letter-heading h3 {
+  font: 400 clamp(22px, 2.2vw, 30px)/1.45 var(--font-hk);
+  letter-spacing: -.035em;
+  margin: 0;
+}
+
+@media (max-width: 460px) {
+  .contact-letter-heading h3 { font-size: 22px; }
+}

@@ -1,176 +1,56 @@
-/* components/Header.tsx */
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import { gsap } from "gsap";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import JourneyLink from "./JourneyLink";
+
 
 const navItems = [
-  { name: "Home", to: "/" },
-  { name: "About Me", to: "/about" },
-  { name: "Projects", to: "/projects" },
-  { name: "Contact Me", to: "/contact" },
+  { name: "Home", to: "surface" },
+  { name: "About", to: "about" },
+  { name: "Projects", to: "projects" },
+  { name: "Services", to: "services" },
 ];
-
-/* ---------- Active SVG Icon ---------- */
-const ActiveIcon = () => (
-  <span className="inline-block align-middle ml-2 -translate-y-[0.04em] active-nav-icon">
-    <img
-      src="/assets/Images/Characters/hollow-knight-avatar.svg"
-      alt="active"
-      className="inline-block"
-      style={{ height: "2em", width: "auto" }}
-    />
-  </span>
-);
+const ActiveIcon = () => <img src="/assets/Images/Characters/hollow-knight-avatar.svg" alt="" className="nav-knight" width="17" height="22" />;
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const drawerRef = useRef<HTMLDivElement>(null);
-  const linksRef = useRef<HTMLAnchorElement[]>([]);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
+  const activeLevel = location.pathname === "/" ? "surface" : location.pathname.slice(1);
 
-  /* ---------- Mobile Drawer Animation ---------- */
   useEffect(() => {
-    if (!drawerRef.current) return;
-
+    const dialog = dialogRef.current;
+    if (!dialog) return;
     if (isOpen) {
-      gsap.set(drawerRef.current, { display: "flex" });
-      gsap.fromTo(
-        drawerRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out" }
-      );
-
-      gsap.fromTo(
-        linksRef.current,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: "power3.out",
-        }
-      );
-    } else {
-      gsap.to(drawerRef.current, {
-        opacity: 0,
-        duration: 0.25,
-        ease: "power2.in",
-        onComplete: () => {
-          gsap.set(drawerRef.current, { display: "none" });
-        },
-      });
+      dialog.showModal();
+      const previous = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.body.style.overflow = previous; dialog.close(); };
     }
   }, [isOpen]);
 
-  /* ---------- Active Icon Pop Animation ---------- */
   useEffect(() => {
-    gsap.fromTo(
-      ".active-nav-icon",
-      { scale: 0.6, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }
-    );
-  }, [location.pathname]);
+    const desktop = window.matchMedia("(min-width: 900px)");
+    const close = () => { if (desktop.matches) setIsOpen(false); };
+    desktop.addEventListener("change", close);
+    return () => desktop.removeEventListener("change", close);
+  }, []);
 
+  const closeMenu = () => { setIsOpen(false); buttonRef.current?.focus(); };
   return (
-    <header className="absolute inset-x-0 top-0 bg-transparent text-white z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:px-8">
-        {/* Logo */}
-        <div className="flex items-center space-x-2">
-          <Link to="/">
-            <img
-              src="/assets/Images/LogoWhite.png"
-              alt="Logo"
-              className="h-20 w-40 md:h-20 md:w-35"
-            />
-          </Link>
-        </div>
-
-        {/* ---------- Desktop Navigation ---------- */}
-        <nav className="hidden md:flex space-x-6">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                `flex items-center transition-colors hover:text-primary-300 ${
-                  isActive ? "text-primary-400" : ""
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  <span>{item.name}</span>
-                  {isActive && <ActiveIcon />}
-                </>
-              )}
-            </NavLink>
-          ))}
-        </nav>
-
-        {/* Mobile Hamburger */}
-        <button
-          className="md:hidden flex items-center text-white"
-          onClick={() => setIsOpen(true)}
-          aria-label="Open menu"
-        >
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
-        </button>
+    <header className={`site-header ${location.pathname === "/" ? "header-home" : "header-inner"}`}>
+      <div className="header-shell">
+        <JourneyLink className="brand" to="surface" aria-label="Saad Design home"><img src="/assets/optimized/logo-white.webp" alt="Saad Design" width="142" height="80" decoding="async" /></JourneyLink>
+        <nav className="desktop-nav" aria-label="Main navigation">{navItems.map(item => <JourneyLink key={item.to} to={item.to} aria-current={activeLevel === item.to ? "page" : undefined}><span>{item.name}</span>{activeLevel === item.to && <ActiveIcon />}</JourneyLink>)}</nav>
+        <JourneyLink className="header-contact" to="contact-letter" contact>Let’s talk <span aria-hidden="true">↓</span></JourneyLink>
+        <button ref={buttonRef} className="menu-toggle" onClick={() => setIsOpen(true)} aria-label="Open navigation" aria-expanded={isOpen} aria-controls="mobile-menu"><span /><span /></button>
       </div>
-
-      {/* ---------- Mobile Fullscreen Drawer ---------- */}
-      <div
-        ref={drawerRef}
-        className="fixed inset-0 z-40 hidden flex-col items-center justify-center bg-black"
-      >
-        {/* Close Button */}
-        <button
-          className="absolute top-6 right-6 text-white text-3xl"
-          onClick={() => setIsOpen(false)}
-          aria-label="Close menu"
-        >
-          ×
-        </button>
-
-        {/* Centered Links */}
-        <div className="flex flex-col items-center space-y-6 text-2xl font-bold">
-          {navItems.map((item, i) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              ref={(el) => {
-                if (el) linksRef.current[i] = el;
-              }}
-              className={({ isActive }) =>
-                `flex items-center justify-center gap-2 transition-colors ${
-                  isActive ? "text-primary-400" : "text-white"
-                }`
-              }
-              onClick={() => setIsOpen(false)}
-            >
-              {({ isActive }) => (
-                <>
-                  <span>{item.name}</span>
-                  {isActive && <ActiveIcon />}
-                </>
-              )}
-            </NavLink>
-          ))}
-        </div>
-      </div>
+      <dialog ref={dialogRef} id="mobile-menu" className="mobile-dialog" aria-label="Navigation" onCancel={closeMenu} onClose={() => setIsOpen(false)}>
+        <button className="menu-close" onClick={closeMenu} aria-label="Close navigation">Close <span aria-hidden="true">×</span></button>
+        <p className="chapter-label">CHOOSE YOUR NEXT CHAPTER</p>
+        <nav aria-label="Mobile navigation">{[...navItems, { name: "Let’s talk", to: "contact-letter" }].map((item, i) => <JourneyLink key={item.to} to={item.to} contact={item.to === "contact-letter"} onClick={closeMenu} aria-current={activeLevel === item.to ? "page" : undefined}><span className="menu-number">0{i + 1}</span>{item.name}<span aria-hidden="true">↓</span></JourneyLink>)}</nav>
+        <p className="menu-signoff">A curious mind. A creative soul.</p>
+      </dialog>
     </header>
   );
 }

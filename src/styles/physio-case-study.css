@@ -1,0 +1,56 @@
+.physio-case { --physio-ink: #c9dedf; margin: 0 0 100px; padding: clamp(22px, 3.5vw, 44px); border: 1px solid #aac9db35; background: linear-gradient(145deg, #0d2027e8, #030a10e8 70%); position: relative; border-radius: 3px; }
+.physio-case-topline { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; padding-bottom: 27px; border-bottom: 1px solid #b4d9df26; color: #8daab7; font: 9px/1.7 var(--font-gm); letter-spacing: .12em; }
+.physio-case-topline > span:last-child { color: #c2d5c9; }
+.physio-case-opening { display: grid; grid-template-columns: 1fr 1.08fr; align-items: center; gap: clamp(28px, 4vw, 65px); margin: 38px 0; }
+.physio-case-category { color: #90b3bc; font: 8px/1.8 var(--font-gm); letter-spacing: .12em; }
+.physio-case h3 { margin: 17px 0 20px; font: 400 clamp(30px, 4vw, 50px)/1.3 var(--font-hk); color: #edf3ec; letter-spacing: -.045em; }
+.physio-case h3 > span { color: #a1cfc1; }
+.physio-case-copy .physio-case-lead { font: 400 clamp(20px, 2vw, 25px)/1.55 var(--font-dmr); color: #c9dfdd; margin-bottom: 21px; }
+.physio-case-copy > p:not([class]) { color: #acbec9; font: 15px/1.85 var(--font-dmr); margin: 0 0 17px; }
+.physio-visit { display: inline-flex; align-items: center; gap: 32px; min-height: 48px; margin-top: 8px; border-bottom: 1px solid #bad3d677; font: 14px/1.6 var(--font-dmr); color: #dfede9; }
+.physio-visit > span { transition: transform .3s; }
+.physio-visit:hover > span { transform: translate(3px, -3px); }
+.physio-specimen { min-width: 0; margin: 0; }
+.physio-specimen-label { display: flex; justify-content: space-between; gap: 16px; padding: 16px 20px; font: 8px/1.7 var(--font-gm); letter-spacing: .1em; color: #b6cbd0; border-bottom: 1px solid #b1c6d222; }
+.physio-specimen-image { aspect-ratio: 4 / 3; overflow: hidden; }
+
+.physio-specimen-options { display: flex; gap: 0; padding: 0 13px; border-block: 1px solid #b1c6d222; }
+.physio-specimen-options button { flex: 1; min-height: 47px; padding: 12px 7px; background: transparent; border: 0; border-bottom: 1px solid transparent; color: #9ab0bb; font: 12px/1.4 var(--font-dmr); }
+.physio-specimen-options button[aria-pressed="true"] { color: #e1eee2; border-bottom-color: #c3dfd0; background: #b2d0c50a; }
+.physio-specimen-options button:hover { color: #fff; }
+.physio-specimen figcaption { display: flex; flex-direction: column; gap: 7px; padding: 16px 20px; color: #a9c0c9; font: 11px/1.7 var(--font-dmr); }
+.physio-specimen figcaption small { font-size: 9px; color: #8ba3af; }
+.physio-specimen figcaption a { text-decoration: underline; text-underline-offset: 3px; }
+.physio-catalogue { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0; padding: 27px 0; border-block: 1px solid #b4d9df26; gap: 22px; }
+.physio-catalogue > div { display: flex; flex-direction: column-reverse; gap: 8px; }
+.physio-catalogue dt { font: 12px/1.6 var(--font-dmr); color: #99b0bd; }
+.physio-catalogue dd { margin: 0; font: 30px/1.2 var(--font-hk); color: #c8dedc; }
+.physio-stack { display: flex; flex-wrap: wrap; gap: 10px 23px; list-style: none; margin: 25px 0 30px; padding: 0; color: #b2c9d5; font: 10px/1.7 var(--font-gm); }
+.physio-stack li { padding-left: 10px; border-left: 1px solid #a4c4d459; }
+.physio-case-details { border-top: 1px solid #b4d9df26; }
+.physio-case-details > summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 0 2px; color: #dfebe9; font: 20px/1.6 var(--font-dmr); cursor: pointer; list-style: none; }
+.physio-case-details > summary::-webkit-details-marker { display: none; }
+.physio-case-details summary small { display: block; color: #879fac; font: 8px/1.7 var(--font-gm); letter-spacing: .12em; margin-bottom: 6px; }
+.physio-case-details summary svg { flex-shrink: 0; transition: transform .35s; }
+.physio-case-details[open] summary svg { transform: rotate(45deg); }
+.physio-case-expanded { padding-top: 38px; }
+.physio-case-story { display: grid; grid-template-columns: 1fr 1.35fr; gap: 40px; padding-bottom: 35px; }
+.physio-section-label { color: #8ba9b2; font: 8px/1.7 var(--font-gm); letter-spacing: .12em; margin: 0 0 15px; }
+.physio-case-expanded h4 { margin: 0 0 14px; color: #d5e8e4; font: 400 21px/1.5 var(--font-dmr); }
+.physio-case-expanded p:not(.physio-section-label) { font: 15px/1.9 var(--font-dmr); color: #a9bdc9; margin: 0; }
+.physio-capabilities { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; padding: 32px 0; border-block: 1px solid #b4d9df26; }
+.physio-capabilities section > span { display: block; font: 10px/1.6 var(--font-gm); color: #829f9a; margin-bottom: 17px; }
+.physio-capabilities h4 { font-size: 18px; }
+.physio-engineering { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 38px; padding: 38px 0; }
+.physio-case-expanded .physio-case-closing { border-top: 1px solid #b4d9df26; padding-top: 25px; color: #bed5cb; }
+@media (max-width: 900px) { .physio-case-opening { grid-template-columns: 1fr; } .physio-case-copy { max-width: 620px; } .physio-specimen { width: 100%; max-width: 650px; margin-inline: auto; } .physio-capabilities { grid-template-columns: 1fr; } }
+@media (max-width: 600px) { .physio-case { margin-bottom: 70px; } .physio-case-topline { font-size: 8px; } .physio-case-topline > span:last-child { display: none; } .physio-case-story, .physio-engineering { grid-template-columns: 1fr; gap: 24px; } .physio-catalogue { grid-template-columns: 1fr 1fr; gap: 25px 15px; } .physio-case h3 { font-size: 31px; } .physio-specimen-label { padding-inline: 12px; font-size: 7px; } .physio-specimen figcaption { padding-inline: 12px; } .physio-specimen-options button { font-size: 11px; } }
+@media (prefers-reduced-motion: reduce) { .physio-case * { transition: none !important; } }
+/* Let the original archive environment breathe behind the case study. */
+.physio-case { border: 0; border-radius: 0; padding-inline: 0; background: radial-gradient(ellipse at 75% 20%, #7eabc00a, transparent 60%); }
+.physio-case-topline { border-top: 1px solid #b4d9df26; padding-top: 27px; }
+
+.physio-specimen-label { justify-content: center; }
+
+.physio-specimen-label { border: 0; color: #a3bac8; }
+.physio-specimen-options { border-top: 0; }
