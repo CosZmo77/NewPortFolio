@@ -1,71 +1,221 @@
-# Saad Design — local portfolio
+<div align="center">
 
-A Hollow Knight inspired React + Vite portfolio. The original home sequence is preserved: hero → about → selected works → technical arsenal → services → contact. Each chamber blends through black into the next environment.
+<img src="public/assets/optimized/logo-white.webp" alt="Saad Design" width="180" />
 
-## Run locally
+<br />
 
-```sh
-npm ci
-npm run dev -- --host 127.0.0.1
+# A small studio. An entire world.
+
+**The personal portfolio of Syed Saad Ahmed.**  
+Designer. Developer. Hollow Knight enthusiast.
+
+A place to explore the work, meet the maker,  
+and find out what we could build together.
+
+<br />
+
+[Enter the archive](#the-work) · [Meet the maker](#behind-the-portrait) · [Run locally](#enter-this-world)
+
+---
+
+</div>
+
+## Every good world hides a little magic.
+
+I wanted a portfolio that felt like somewhere you could go.
+
+Not just a collection of screenshots, but a place with atmosphere:
+quiet corners, strange little characters, a portrait that opens a portal,
+and another environment waiting further down.
+
+Hollow Knight gave me the inspiration. My own work gave me the reason
+to build it.
+
+Scroll through the world, or choose a chapter and step inside.
+
+<br />
+
+## A map for the curious
+
+| Chapter | What lives here |
+|:---|:---|
+| **The surface** | An introduction, a sleeping Knight, and a few paths forward. |
+| **The maker** | My story, experience, and the person behind the studio. |
+| **The archive** | Websites, platforms, and personal experiments brought to life. |
+| **The arsenal** | The tools and skills I use to build them. |
+| **The workshop** | Design, development, and creative direction. |
+| **The quiet clearing** | A place to start a conversation. |
+
+The homepage descends through six environments. Dedicated About,
+Projects, Services, and Contact pages let each chapter breathe.
+
+<br />
+
+## The work
+
+### iLovePhysio
+**A personal project about seeing anatomy and understanding movement.**
+
+Interactive anatomy models, illustrated atlases, and guided learning,
+connected through a searchable resource library.
+
+Built with **Astro, TypeScript, React, PostgreSQL, Better Auth,
+and model-viewer**.
+
+[Explore iLovePhysio →](https://ilovephysio.saadstudio.space/)
+
+---
+
+### Cohorts App
+A place for creators to bring communities, courses, and members together.
+
+### InkWorldWide
+WordPress and frontend work across responsive business websites.
+
+### Shifa Foundation
+A digital home for an NGO, with a donation flow supporting its work.
+
+### Medicalshala
+Healthcare workflows, real-time communication, and connected services.
+
+### SwiftCare
+Appointment booking and tools for managing doctors’ schedules.
+
+### MERN Job Portal
+Job listings, search, profiles, and account access.
+
+Each project shares the same gallery format: a website preview,
+an introduction, the technology behind it, and expandable build notes.
+
+<br />
+
+## Behind the portrait
+
+I’m **Saad**, a designer and developer based in **Mysore, India**.
+
+I run my own creative studio, which means I get to care about both
+sides of a website: how it feels and how it works.
+
+Alongside the studio, I work as a **Project Coordinator & Software
+Developer at Xentric Integrated Solutions Pvt. Ltd**, Bangalore.
+
+My work there connects telecom deployment data, technical teams,
+field operations, and hands-on platform development.
+
+I like projects where visual thinking and practical problem-solving
+get to sit at the same table.
+
+<br />
+
+## Small details, deliberately built
+
+- **An arrival sequence** prepares the opening assets before revealing the world.
+- **A portrait portal** connects Home and About.
+- **Different atmospheres** give the levels their own character.
+- **Soft black fades** let environments blend into one another.
+- **A resting chamber** gives the footer a place in the world.
+- **Expandable project notes** keep the gallery readable without hiding the thinking.
+
+The atmosphere matters. So does being able to use the website.
+
+Motion respects reduced-motion preferences. Decorative effects pause
+when they leave the screen. Images use optimised assets, and secondary
+pages load on demand.
+
+<br />
+
+## Under the scenery
+
+| Layer | Tools |
+|:---|:---|
+| Interface | React 19 · TypeScript |
+| Styling | Tailwind CSS 4 · Custom CSS |
+| Motion | GSAP · ScrollTrigger · CSS |
+| Navigation | React Router |
+| Development | Vite 7 · ESLint |
+| Contact | Web3Forms |
+
+> Astro powers **iLovePhysio**, the featured personal project.
+> This portfolio itself is built with **React and Vite**.
+
+<br />
+
+## Enter this world
+
+```bash
+git clone https://github.com/CosZmo77/NewPortFolio.git
+cd NewPortFolio
+npm install
+npm run dev
 ```
 
-Open the URL printed by Vite. No deployment or Git push is needed.
+Open the local address printed by Vite.
 
-```sh
+### Check the build
+
+```bash
 npm run lint
 npm run build
-npm run preview -- --host 127.0.0.1
+npm run preview
 ```
 
-## Motion and scenery
+The contact form uses Web3Forms and requires an internet connection
+to deliver messages.
 
-- `src/components/LevelBackdrop.tsx` layers original scenery, atmospheric effects, and a dark foreground. The masks in `src/index.css` fade both ends into the black page.
-- `src/components/LevelEffects.tsx` gives each home level its own atmosphere: soul motes at the surface, fireflies in About, rain in Projects, crystals in Skills, embers in Services, and lanterns in Contact. The effects pause offscreen and in hidden tabs, with fewer particles on mobile.
-- `src/hooks/useDescent.ts` owns scoped GSAP entrances, opposing parallax movement, and pointer-driven charm/card lighting. Each effect is cleaned up on navigation. The page keeps native scrolling.
-- `src/components/DepthMap.tsx` moves the Knight marker between the original home sections on larger screens.
-- CSS/GSAP motion respects the system reduced-motion preference. Existing animated character artwork is preserved.
-- Ambient particles and the marquee pause offscreen; the marquee also pauses in hidden tabs and has a pause button.
+<br />
 
-## Interactive details
+## Find your way through the code
 
-- The current Xentric Integrated Solutions role is shown on the dedicated About page, with a short introduction on Home in `CurrentExperience.tsx`. Dates, title, location, and responsibilities follow the owner's supplied experience.
-- `ProjectCollection.tsx` renders the same gallery on Home and Projects from `src/data/projects.ts`. Home features three entries; Projects includes all seven. Each has the same screenshot frame, overview, stack, links, and native details disclosure. The full iLovePhysio technical notes load only when opened.
-- iLovePhysio uses the owner-supplied homepage screenshot at `public/assets/physio/ilovephysio-home.png`. The previous anatomy illustrations and their attribution remain archived in `public/assets/physio/ATTRIBUTION.md`.
+```text
+src/
+├── components/    The reusable pieces of the world
+├── data/          Shared project content
+├── hooks/         Arrival, visibility, and descent behaviour
+├── lib/           Navigation helpers
+├── pages/         Home and the dedicated chapters
+└── styles/        The visual language of each environment
 
-- Home opens with an asymmetric name composition and an illustrated Knight shrine. Three original character charms lead into work, About, and services; focus/hover lights their paths and wakes only the selected character. The central Knight has a brief, replayable awakening. Its spark elements are removed after the effect; no persistent animation loop is added. The shrine stacks below the title on phones, where content remains fully opaque while scrolling.
+public/assets/
+├── Images/        Original artwork
+├── optimized/     Lightweight assets used by the portfolio
+└── physio/        iLovePhysio imagery and attribution
 
-- Services uses a three-discipline chooser with the original character icons. Its contact links carry the chosen service into the form.
-- The original photo appears in an engraved character frame. Awaken portrait opens a portal to /about; the About portrait returns to /.
-- Contact is an ornamental letter on /contact with project choices, labelled fields, and sending, error, and success states. Service links preselect the craft through the service query parameter. Errors preserve the draft.
-- Header links, shrine paths, and footer doorways open dedicated /about, /projects, /services, and /contact chapters. Supported browsers dissolve between scenes after the destination chunk loads. Reduced motion and other browsers navigate directly. The Begin the descent link, DepthMap, and chapter cues explicitly scroll within the original six-level homepage.
-- The complete project archive lives on /projects. Home retains selected work and an archive doorway, keeping the level descent concise.
-
-## Arrival and the resting chamber
-
-- `ArrivalGate` holds the first reveal until fonts and opening art are ready. On fast connections the entrance stays visible for 2.2 seconds, then fades for 760ms; reduced motion uses a 650ms minimum and a short fade. Slow loads do not acquire another full hold. Hero layers emerge together with small movements and gentle easing. Page animations initialize before paint and start with the reveal. A stable scrollbar gutter prevents horizontal shifts when scroll locks are released.
-- The footer is a small resting chamber: character doorways lead to About and Projects, the bench returns to the surface, and social links appear as charms. It keeps the original background and contains no emoji.
-
-## Faster assets
-
-Original files under `public/assets/Images` remain untouched. The app uses WebP derivatives in `public/assets/optimized`, with smaller mobile variants and lazy loading below the fold. Hero artwork: **11,383,639 → 145,848 bytes** on desktop, **78,510 bytes** for the mobile crop. The first document load uses an asset-based percentage screen: it prepares all four fonts, opening artwork, and any initial route chunk before revealing the portfolio. The silver progress bar reports completed opening resources without a per-frame React loop. The entrance uses the original Knight, logo, and opening scenery; a six-second fallback prevents stalled assets from trapping visitors. Internal navigation does not replay it. Fonts use `font-display: swap`; secondary routes load on demand.
-
-Regenerate assets with Python and Pillow:
-
-```sh
-python -m pip install Pillow
-python scripts/optimize-assets.py
+scripts/           Asset preparation utilities
 ```
 
-The exact image mapping, dimensions, and sizes are recorded in `public/assets/optimized/manifest.json`.
+Project content lives in `src/data/projects.ts`.
+The homepage and full archive use the same gallery component,
+so updates stay consistent.
 
-The contact page retains its existing Web3Forms integration and needs an internet connection to deliver real messages. Local UI tests intercepted the request and simulated success/failure without sending a message.
+<br />
 
-## Motion performance
+## A note on the inspiration
 
-- Level fades use black gradient overlays, avoiding full-section masks around moving scenery. The original backgrounds and level sequence are preserved.
-- Decorative particle elements exist only for visible levels, and disappear when the tab is hidden or reduced motion is requested. They also wait until the entrance veil starts leaving. Each environment keeps its own particle treatment.
-- Desktop scenery uses one scroll-linked image transform per level. Mobile scenery stays still; foregrounds no longer have a second parallax layer.
-- `CharacterSprite` displays the original animation only while visible and selected. Otherwise it uses a first-frame poster, including for reduced motion. Regenerate posters after optimizing assets with `python scripts/create-character-posters.py`.
-- Pointer tilt caches its element bounds on entry, avoiding layout reads on every mouse move.
+This is an independent personal portfolio inspired by **Hollow Knight**.
 
-Local development browser spot check (1280 × 720, two seconds at the hero): before, 58 animation frames and 24 frame intervals over 33.4 ms; after, 121 frames and none over 33.4 ms. CSS animations present fell from 159 to 10. This is a local comparison, not a guarantee for every device.
+Hollow Knight and its associated characters and artwork belong to
+**Team Cherry** and their respective owners. This project is not
+affiliated with or endorsed by Team Cherry.
+
+Anatomy asset attribution is recorded in
+[`public/assets/physio/ATTRIBUTION.md`](public/assets/physio/ATTRIBUTION.md).
+
+---
+
+<div align="center">
+
+### What shall we make next?
+
+A half-formed idea is a perfectly good place to start.
+
+[Email](mailto:syedsaadahmed77@gmail.com) ·
+[LinkedIn](https://www.linkedin.com/in/saad25492/) ·
+[GitHub](https://github.com/CosZmo77)
+
+<br />
+
+**Imagined and built in Mysore, India.**
+
+*You found a quiet corner. Stay a while.*
+
+</div>
